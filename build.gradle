@@ -1,5 +1,5 @@
 plugins {
-    id "net.serenity-bdd.serenity-gradle-plugin" version "3.5.1"
+    id "net.serenity-bdd.serenity-gradle-plugin" version "3.5.0"
     id 'java'
     id 'eclipse'
     id 'idea'
@@ -36,9 +36,15 @@ dependencies {
 }
 
 test {
-    useJUnitPlatform()
+    //useJUnitPlatform()
     testLogging.showStandardStreams = true
+    testLogging.exceptionFormat = 'full'
+    maxParallelForks = Runtime.runtime.availableProcessors() - 1
     systemProperties System.getProperties()
+}
+
+serenity{
+    testRoot = "starter"  //Paquete starte.
 }
 
 gradle.startParameter.continueOnFailure = true
